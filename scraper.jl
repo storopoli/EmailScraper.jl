@@ -1,7 +1,5 @@
-using Base:Set
 using Core:Vector
 using Cascadia
-using DataFrames
 using Gumbo
 using HTTP
 using LoopVectorization
@@ -37,8 +35,10 @@ function valid_link!(link::String)
         missing
 end
 
-function extract_email!(str::String)
-    String.(SubString.(str, findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}", str)))
+function extract_email(str::String)
+    # this might be better
+    # eachmatch_string(regex, str) = (String(i.match) for i in eachmatch(regex, str))
+    return String.(SubString.(str, findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}", str)))
 end
 
 function find_emails(body::HTMLElement)::Vector{Union{String,Missing}}
