@@ -1,5 +1,5 @@
 # EmailScraper.jl Documentation
 
 ```@docs
-scrape_domain(x)
+scrape_url(x)
 ```
