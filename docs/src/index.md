@@ -1,5 +1,5 @@
 # EmailScraper.jl Documentation
 
 ```@docs
-scrape_url(x)
+EmailScraper.scrape_url(x)
 ```
