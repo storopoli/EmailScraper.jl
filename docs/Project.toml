@@ -1,0 +1,6 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+EmailScraper = "4bfef8eb-d10e-4c1e-a6a0-b774b262ad28"
+
+[compat]
+Documenter = "0.27"
