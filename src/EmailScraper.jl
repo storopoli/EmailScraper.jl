@@ -26,7 +26,7 @@ julia> scrape_url("julialang.org/about/help/")
 """
 function scrape_url(url::String)
     body = request_body(url)
-    links = get_links(body)
+    # links = get_links(body) # in the future this will scrap links
     emails = find_emails(body)
     return emails
 end
