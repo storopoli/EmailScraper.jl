@@ -11,5 +11,5 @@ A general-purpose email scrapper to extract email addresses from urls.
 `EmailScraper.jl` exports only one function:
 
 ```
-scrape_emails(url; depth=3)
+scrape_url(url)
 ```
