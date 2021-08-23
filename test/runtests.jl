@@ -1,62 +1,60 @@
 using EmailScraper
+using Cascadia
+using Gumbo
+using HTTP
 using Test
 
-const BODY = """
-    HTML String
-    """
+BODY = EmailScraper.request_body("storopoli.io")
 
 @testset "EmailScraper" begin
 
     @testset "Domain" begin
 
         @testset "request_body" begin
-            @test 1 == 1
-            @test BODY == """
-            HTML String
-            """
-            # test strings:
-            # with http
-            # without http
-            # with https
-            # with www
-            # test Throw Error with invalid link
+            @test EmailScraper.request_body("storopoli.io") isa HTMLElement
+            @test EmailScraper.request_body("string") |> text |> isempty
         end
-        @testset "valid_links!" begin
-            # test ignored_extensions
-            # test ignored_domains
+
+        @testset "valid_links" begin
+            @test EmailScraper.valid_link("https://julialang.org") == "https://julialang.org"
+            @test EmailScraper.valid_link("https://julialang.org/temp.doc") isa Missing
+            @test EmailScraper.valid_link("https://julialang.org/temp.docx") isa Missing
+            @test EmailScraper.valid_link("https://julialang.org/temp.@@search") isa Missing
+            @test EmailScraper.valid_link("https://facebook.com") isa Missing
+            @test EmailScraper.valid_link("https://facebook.com") isa Missing
         end
 
         @testset "get_links" begin
-            # test with a nice scraping friendly link in the web
+            @test "https://github.com/storopoli" in EmailScraper.get_links(BODY)
+            # if it returns true
         end
 
     end # Links
 
     @testset "Emails" begin
 
-        @testset "obfuscated_email" begin
-            # test obfuscated emails (AT DOT etc.)
-        end
 
          @testset "extract_email" begin
-            # test if parsers a regular emails
-            # test inside a nasty String
-            # test obfuscated emails (AT DOT etc.)
+            @test EmailScraper.extract_emails("LOREMIPUSM hello@hello.com LoReM Ipsum") == ["hello@hello.com"]
+            @test EmailScraper.extract_emails("LOREMIPUSM hello@hello.com ### !! LoReM hello@hello.com Ipsum") == ["hello@hello.com"]
+            @test EmailScraper.extract_emails("LOREMIPUSM hello@hello.com LoReM## !! @ hello2@hello.com Ipsum") == ["hello@hello.com", "hello2@hello.com"]
         end
 
         @testset "valid_email" begin
-            # test with known TLDs
-            # test with unknown TLDs
-        end
-
-        @testset "find_emails" begin
-            # test with a HTML body full string
+            @test EmailScraper.valid_email("hello@hello.com") == true
+            @test EmailScraper.valid_email("hello@hello.com.br") == true
+            @test EmailScraper.valid_email("hello@hello.co.uk") == true
+            @test EmailScraper.valid_email("hello@hello.png") == false
+            @test EmailScraper.valid_email("hello@hello.pdf") == false
+            @test EmailScraper.valid_email("hello@hello.xpto") == false
         end
 
     end # Emails
 
-    @testset "scrape_domain" begin
-        # test with a nice scraping friendly link in the web
+    @testset "scrape_url" begin
+        @test scrape_url("http://www.webscraper.io/test-sites/e-commerce/allinone") == String[]
+        @test scrape_url("storopoli.io") == ["thestoropoli@gmail.com"]
+        @test "contact@julialang.org" in scrape_url("julialang.org/about/help/")
     end # main function
 
 end # EmailScraper

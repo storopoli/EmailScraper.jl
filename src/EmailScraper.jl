@@ -1,20 +1,36 @@
 module EmailScraper
 
+using Cascadia
+using Gumbo
 using HTTP
 
-"""
-    scrape_domain(x)
+include("TLDs.jl")
+include("domain.jl")
+include("email.jl")
 
-Returns yada yada.
 """
-function scrape_domain(domain::String)
-    body = request_body(domain)
-    links = get_links(body, domain)
+    scrape_url(url::String)
+
+Scrapes a `url` and returns all email adresses found in links and in text.
+
+# Arguments
+- `url::String`: the desired url to scrape.
+
+# Examples
+```julia-repl
+julia> scrape_url("julialang.org/about/help/")
+2-element Vector{String}:
+ "contact@julialang.org"
+ "logan@julialang.org"
+```
+"""
+function scrape_url(url::String)
+    body = request_body(url)
+    links = get_links(body)
     emails = find_emails(body)
-    bodies = vmap(request_body, links)
     return emails
 end
 
-export scrape_domain
+export scrape_url
 
 end # module

@@ -11,19 +11,5 @@ A general-purpose email scrapper with multithread capabilities that crawles doma
 `EmailScraper.jl` exports only one function:
 
 ```
-scrape_emails(url; depth=3, follow_external=false)
+scrape_emails(url; depth=3)
 ```
-
-## Notes
-
-1.  RegEx to clean url:
-
-    ```
-    http[s]?:\/\/(?:[w]{3}\.)?(.*)(?<!\/)
-    ```
-
-2. RegEx for Email:
-
-    ```
-    ([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)
-    ```
