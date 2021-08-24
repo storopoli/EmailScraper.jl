@@ -11,6 +11,6 @@ makedocs(
 
 deploydocs(
     repo = "github.com/storopoli/EmailScraper.jl.git",
-    target = "build",
-    devbranch = "main"
+    devbranch = "main",
+    push_preview=true
 )
