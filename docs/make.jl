@@ -1,11 +1,17 @@
 using Documenter, EmailScraper
 
+DocMeta.setdocmeta!(
+    EmailScraper,
+    :DocTestSetup,
+    :(using EmailScraper)
+)
+
 makedocs(
-    sitename="EmailScraper.jl",
+    sitename = "EmailScraper.jl",
     authors = "Jose Storopoli",
-    modules=[EmailScraper],
-    pages=[
-    "Home" =>"index.md",
+    modules = [EmailScraper],
+    pages = [
+        "Home" => "index.md",
     ],
 )
 
