@@ -1,3 +1,3 @@
 var documenterSearchIndex = {"docs":
-[{"location":"#EmailScraper.jl-Documentation","page":"Home","title":"EmailScraper.jl Documentation","text":"","category":"section"},{"location":"","page":"Home","title":"Home","text":"scrape_url(x)","category":"page"}]
+[{"location":"#EmailScraper.jl-Documentation","page":"Home","title":"EmailScraper.jl Documentation","text":"","category":"section"},{"location":"","page":"Home","title":"Home","text":"scrape_url","category":"page"},{"location":"#EmailScraper.scrape_url","page":"Home","title":"EmailScraper.scrape_url","text":"scrape_url(url::String)\n\nScrapes a url and returns all email adresses found in links and in text.\n\nArguments\n\nurl::String: the desired url to scrape.\n\nExamples\n\njulia> scrape_url(\"julialang.org/about/help/\")\n2-element Vector{String}:\n \"contact@julialang.org\"\n \"logan@julialang.org\"\n\n\n\n\n\n","category":"function"}]
 }
