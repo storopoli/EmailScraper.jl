@@ -1,7 +1,7 @@
 name = "EmailScraper"
 uuid = "4bfef8eb-d10e-4c1e-a6a0-b774b262ad28"
 authors = ["Jose Storopoli <thestoropoli@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Cascadia = "54eefc05-d75b-58de-a785-1a3403f0919f"
