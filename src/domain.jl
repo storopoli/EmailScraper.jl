@@ -1,5 +1,7 @@
 function request_body(url::String)
-    headers = ["User-Agent" => "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"]
+    headers = [
+        "User-Agent" => "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
+    ]
     url = replace(url, "https://" => "http://")
     url = startswith("http://", url) ? url : "http://" * url
     try
@@ -28,8 +30,8 @@ function valid_link(link::String)
     # valid_links = r"(https?|ftp)://(www\d?|[a-zA-Z0-9]+)?\.[a-zA-Z0-9-]+(\:|\.)([a-zA-Z0-9.]+|(\d+)?)([/?:].*)?"
     # valid_links = r"|<a.*(?=href=\"([^\"]*)\")[^>]*>([^<]*)</a>|i"
     if contains(link, valid_links) &&
-           !contains(link, ignore_extensions) &&
-           !contains(link, ignore_domains)
+       !contains(link, ignore_extensions) &&
+       !contains(link, ignore_domains)
         return link
     else
         return missing
@@ -42,6 +44,6 @@ function get_links(body::HTMLElement)::Vector{String}
         return Vector{String}()
     else
         links = mapreduce(elem -> valid_link(getattr(elem, "href")), vcat, elements)
-        return links |> skipmissing |> unique
+        return unique(skipmissing(links))
     end
 end
