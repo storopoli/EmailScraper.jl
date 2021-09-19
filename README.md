@@ -16,3 +16,4 @@ A general-purpose email scraper to extract email addresses from urls.
 ```
 scrape_url(url)
 ```
+
